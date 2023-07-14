@@ -5,6 +5,15 @@
  * @author Gonzalo Rives
  */
 
+// Variables
+
+/**
+ * Clase específica del botón para operadores
+ * 
+ * @type {String}
+ */
+const buttonOperatorClass = 'calculator__key--operator';
+
 /**
  * Resuelve una expresión matemática
  * 
@@ -13,8 +22,7 @@
  * 
  * @param {String}            expression   Expresión a resolver
  *
- * @returns {String}          Resultado de la expresión, devuelve falso en 
- *                            error.
+ * @returns {String}          Resultado de la expresión, devuelve falso en error.
  */
 function calculate(expression) {
     try {
@@ -80,4 +88,46 @@ function clearAllVisor(visorElement, calcVisorElement) {
  */
 function clearCalcVisor(calcVisorElement) {
     calcVisorElement.value = '⠀';
+}
+
+/**
+ * Agrega el resultado previo al principio del visor
+ * 
+ * Se agregará al inicio de todo quedando primero, antes
+ * que el operador previamente seleccionado.
+ * 
+ * @example De "-" a "50-"
+ * 
+ * @param {HTMLDivElement}    visorElement       Elemento del visor   
+ * @param {String}            previousAnswer     Respuesta anterior                 
+ */
+function addResultToVisorStart(visorElement, previousAnswer) {
+    visorElement.insertAdjacentText("afterbegin", previousAnswer);
+}
+
+/**
+ * Devuelve si el botón en cuestión es el de un operador matemático
+ * 
+ * @param {HTMLButtonElement}  buttonElement          Elemento del botón en cuestión
+ * @constant {String}          buttonOperatorClass    Constante con el nombre de clase de
+ *                                                    los operadores matemáticos
+ *
+ * @returns {Boolean}          Verdadero por botón de operador, null si no lo es                          
+ */
+function isAnOperatorButton(buttonElement) {
+    return buttonElement.className.match(buttonOperatorClass);
+}
+
+/**
+ * Devuelve si el contenido del visor está vacio
+ * 
+ * Mediante el innerText del elemento visor (Resultado/result) se busca 
+ * un valor en la primera posición sin importar el tipo del mismo.
+ * 
+ * @param {HTMLDivElement}    visorElement       Elemento del visor                                                   los operadores matemáticos
+ *
+ * @returns {Boolean}         Verdadero por valor existente                       
+ */
+function isVisorEmpty(visorElement) {
+    return parseInt(visorElement.innerText[0]);
 }

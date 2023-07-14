@@ -37,7 +37,9 @@
    * ========================================================================== */
 
 * {
-    /* width */
+    /* Barra de scroll en general */
+
+    /* Tamaño */
     ::-webkit-scrollbar {
         width: 2px;
         height: 1rem;
@@ -48,12 +50,11 @@
         background: var(--scrollbar-track-color);
     }
     
-    /* Handle */
+    /* Barra */
     ::-webkit-scrollbar-thumb {
         background: var(--scrollbar-color);
     }
   
-    /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
         background: var(--scrollbar-hover-color);
     }

@@ -9,31 +9,65 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-//// Variables
+    /**
+     * Elemento con todos los botones disponibles mediante
+     * la clase 'calculator__key'
+     * 
+     * @type {HTMLElement}
+     */
+    const buttons = document.querySelectorAll('.calculator__key');
 
-// Constantes
-const expErrorMessage = 'ERROR';
-const buttonOperatorClass = 'calculator__key--operator';
+    /**
+     * Elemento contenedor del visor - Parte de resultados
+     * 
+     * @type {HTMLDivElement}
+     */
+    const resultVisor = document.querySelector('.calculator__visor--result');
 
-const buttons = document.querySelectorAll('.calculator__key');
-const resultVisor = document.querySelector('.calculator__visor--result');
-const calcResultVisor = document.querySelector('.calculator__visor--calc');
+    /**
+     * Elemento contenedor del visor - Parte del historial de 
+     * cálculos
+     * 
+     * @type {HTMLDivElement}
+     */
+    const calcResultVisor = document.querySelector('.calculator__visor--calc');
 
-// Bandera para no agregar elementos al visor
-// cuando no sea necesario.
-let resetVisorFlag = true;
+    /**
+     * Almacena el resultado exitoso actual para
+     * futuras validaciones
+     * 
+     * @type String
+     */
+    let previousAns = '';
 
-// Bandera para resetear todos los valores del visor
-let resetAllFlag = false;
+    /**
+     * Bandera para no agregar elementos al visor cuando 
+     * no sea necesario.
+     * 
+     * @type Bool
+     */
+    let resetVisorFlag = true;
 
-// Almacena el resultado exitoso superior
-let previousAns = '';
+    /**
+     * Bandera para resetear todos los valores del visor
+     * 
+     * @type Bool
+     */
+    let resetAllFlag = false;
+
+    /**
+     * Mensaje mostrado en error de calculo
+     * 
+     * @type {String}
+     */
+    const expErrorMessage = 'ERROR';
 
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            // Valor del botón presionado
             const buttonValue = button.innerText;
        
+            //// Chequeos generales
+
             // Primera bandera
             // Solo visor del cálculo
             if(resetVisorFlag) {
@@ -51,23 +85,25 @@ let previousAns = '';
                 resetAllFlag = false;
             }
 
-            // Si ya se hizo un calculo y se apreta un operador
-            // se agregará el resultado anterior al principio
-            if(button.className.match(buttonOperatorClass) &&
-                previousAns) {
-                resultVisor.insertAdjacentText("afterbegin", previousAns);
+            // Despues de un cálculo anterior, si el visor está vacio
+            // y se apreta un operador, se agregará el resultado anterior
+            if(isAnOperatorButton(button) && !isVisorEmpty(resultVisor) && previousAns) {
+                addResultToVisorStart(resultVisor, previousAns);
             }
 
             // Si el boton apretado y el valor del visor son 0
+            // TODO: Agregar validación de respuestas repetidas
             if(parseInt(resultVisor.textContent) === 0) {
                 // No hace nada
                 resetVisorFlag = true;
             }
-            // Casos generales
+
+            //// Casos generales
+
             if (buttonValue === 'C') {
                 // Reset de valores
                 clearAllVisor(resultVisor, calcResultVisor);
-                setVisorValue(0, resultVisor);
+                setVisorValue('0', resultVisor);
 
                 previousAns = '';
                 resetVisorFlag = true;
@@ -77,8 +113,8 @@ let previousAns = '';
                 const expression = resultVisor.innerText.replace('=', '');
                 const result = calculate(expression);
 
-                // TODO: Arreglar error al intentar varias veces con misma expresión
                 if(!result) {
+                    // Muestra mensaje de error
                     setVisorValue(expErrorMessage, resultVisor);
                 } else {
                     setVisorValue(result, resultVisor);
