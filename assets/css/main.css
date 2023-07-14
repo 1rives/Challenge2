@@ -8,27 +8,56 @@
    * ========================================================================== */
 
 :root {
-    --white: #ffffff;
+    --full-white: #ffffff;
+    --white: #f0f0f0;
     --light-grey: #d6d6d6;
 
     --bg-color: #d0d3db;
-    --main-text-color: var(--white);
+    --main-text-color: var(--full-white);
     --secondary-text-color: var(--light-grey);
 
     --shadow-color: rgba(0, 0, 0, 0.15);
     --semi-strong-shadow-color: rgba(0, 0, 0, 0.3);
     --strong-shadow-color: rgba(0, 0, 0, 0.5);
 
+    --button-hover-color: #e6e6e6;
     --button-operator-color: #c9d4da;
     --button-operator-active-color: #bac5ca;
     --button-enter-color: #ffb84e;
     --button-enter-active-color: #e2a344;
-    --button-gap-color: rgb(159, 172, 182);
+    --button-gap-color: #9facb6;
     
-    --calculator-output-color: #424c52;
+    --scrollbar-color: var(--white);
+    --scrollbar-hover-color: #888;
+    --scrollbar-track-color: #555;
+
+    --calculator-visor-color: #424c52;
 }
   /* Elementos generales
    * ========================================================================== */
+
+* {
+    /* width */
+    ::-webkit-scrollbar {
+        width: 2px;
+        height: 1rem;
+    }
+  
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track-color);
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-color);
+    }
+  
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-hover-color);
+    }
+}
 
 body {
     display: grid;
@@ -61,11 +90,13 @@ body {
 
 }
 
-.calculator__output {
+.calculator__visor {
     font-size: 2.2rem;
     text-align: end; /* Los números siempre estarán hacia la derecha */
+    
+    overflow: auto; /* Habilita el scroll cuando el número sea muy grande */
 
-    background-color: var(--calculator-output-color);
+    background-color: var(--calculator-visor-color);
     color: var(--main-text-color);
     
     padding-top: 0rem; 
@@ -74,12 +105,12 @@ body {
     padding-left: 1rem; 
 }
 
-.calculator__output--calc {
-    font-size: 1.3rem;
+.calculator__visor--calc {
+    font-size: 1.1rem;
 
     color: var(--secondary-text-color);
 
-    padding-top: 0.55rem;
+    padding-top: 1.4rem;
     padding-bottom: unset;
 }
 
@@ -106,7 +137,7 @@ body {
     padding-left: 1.6rem; 
     padding-right: 1.6rem; 
 
-    transition: box-shadow 0.2s, background-color 0.1s; /* Transición para :hover */
+    transition: box-shadow 0.15s, background-color 0.07s; /* Transición para :hover */
 }
 
 .calculator__key:hover {
@@ -114,6 +145,7 @@ body {
 }
 
 .calculator__key:active {
+    background-color: var(--button-hover-color);
     box-shadow: 0 0 4px 1px var(--semi-strong-shadow-color) inset;
 }
 
