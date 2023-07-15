@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearAllVisor(resultVisor, calcResultVisor);
                 setVisorValue('0', resultVisor);
 
-                previousAns = '';
-
+                previousAns = '';            
+                resetVisorFlag = true;
             } else if (buttonValue === '=') {
                 // Calcular el resultado
                 const expression = resultVisor.innerText.replace('=', '');
