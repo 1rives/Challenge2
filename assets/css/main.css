@@ -10,6 +10,9 @@
     --full-white: #ffffff;
     --white: #f0f0f0;
     --light-grey: #d6d6d6;
+    --light-gray: #888;
+    --gray: #555;
+    --dark-blue: #424c52;
 
     --bg-color: #d0d3db;
     --main-text-color: var(--full-white);
@@ -27,10 +30,12 @@
     --button-gap-color: #9facb6;
     
     --scrollbar-color: var(--white);
-    --scrollbar-hover-color: #888;
-    --scrollbar-track-color: #555;
+    --scrollbar-hover-color: var(--light-gray);
+    --scrollbar-track-color: var(--gray);
 
-    --calculator-visor-color: #424c52;
+    --icon-color: var(--gray);
+
+    --calculator-visor-color: var(--dark-blue);
 }
   /* Elementos generales
    * ========================================================================== */
@@ -69,9 +74,31 @@ body {
     align-items: center;
 }
 
+header {
+    padding: 20px;
+    align-content: center;
+}
+
+.icon {
+    position: fixed;
+    width: 32px;
+    height: 32px; 
+    left: 1.25%; /* Posición del ícono */
+    bottom: 2%; /* Posición del ícono */
+
+    opacity: 75%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #424c52;
+
+    -webkit-mask-image: url('/assets/icons/github.svg'); /* Color del ícono */
+    mask-image: url('/assets/icons/github.svg'); /* Color del ícono */
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}
+
   /* Elementos de la calculadora
    * ========================================================================== */
-  
 
 .calculator {
     overflow: hidden; /* Los elementos no saldrán de la calculadora */
