@@ -62,6 +62,9 @@
     ::-webkit-scrollbar-thumb:hover {
         background: var(--scrollbar-hover-color);
     }
+
+    /* Arreglo para linea blanca en visor para Chromium */
+    -webkit-margin-before: -2px;
 }
 
 body {
