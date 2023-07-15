@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * 
      * @type String
      */
-    let previousAns = '';
+    let previousAns = '0';
 
     /**
      * Bandera para no agregar elementos al visor cuando 
@@ -91,13 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 addResultToVisorStart(resultVisor, previousAns);
             }
 
-            // Si el boton apretado y el valor del visor son 0
-            // TODO: Agregar validación de respuestas repetidas
-            if(parseInt(resultVisor.textContent) === 0) {
-                // No hace nada
-                resetVisorFlag = true;
-            }
-
             //// Casos generales
 
             if (buttonValue === 'C') {
@@ -113,9 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const expression = resultVisor.innerText.replace('=', '');
                 const result = calculate(expression);
 
-                if(!result) {
-                    // Muestra mensaje de error
-                    setVisorValue(expErrorMessage, resultVisor);
+                if(typeof result === 'undefined') {
+                    // Muestra resultado anterior si está vacio
+                    setVisorValue(previousAns, resultVisor);
                 } else {
                     setVisorValue(result, resultVisor);
                     setCalcVisorValue(expression, calcResultVisor);
@@ -124,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     previousAns = result;
                 }
                 
-                resetVisorFlag = true;
+                
             }
         });
     });

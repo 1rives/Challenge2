@@ -3,7 +3,6 @@
  *  Gonzalo Rives
  */
 
-
   /* Variables
    * ========================================================================== */
 
@@ -165,6 +164,7 @@ body {
 
     background-color: var(--button-enter-color);
 
+    /* Estilos para mostrar correctamente el botón Enter */
     grid-column: 4 / 5; /* Se posiciona en la esquina derecha */
     grid-row-start: 2; /* Empieza desde la segunda fila */
     grid-row-end: span 4; /* Se expande 4 filas hacia abajo */

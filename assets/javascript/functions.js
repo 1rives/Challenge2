@@ -10,26 +10,27 @@
 /**
  * Clase específica del botón para operadores
  * 
- * @type {String}
+ * @type {String} 
  */
 const buttonOperatorClass = 'calculator__key--operator';
 
 /**
  * Resuelve una expresión matemática
  * 
- * Usar la función eval() es inseguro, por lo que se recurrirá 
- * a una libreria externa para realizar los calculos. 
+ * Usar la función eval() no está recomendada, por lo que se 
+ * recurrirá a la libreria Math.js para realizar los calculos. 
+ * Devuelve el mensaje de error al encontrarse uno.
  * 
  * @param {String}            expression   Expresión a resolver
  *
- * @returns {String}          Resultado de la expresión, devuelve falso en error.
+ * @returns {String}          Resultado de la expresión
  */
 function calculate(expression) {
     try {
-        var result = eval(expression);
+        var result = math.evaluate(expression);
         return result;
-    } catch {
-        return false;
+    } catch(ex) {
+        return ex.message;
     }
 }
 
@@ -124,7 +125,7 @@ function isAnOperatorButton(buttonElement) {
  * Mediante el innerText del elemento visor (Resultado/result) se busca 
  * un valor en la primera posición sin importar el tipo del mismo.
  * 
- * @param {HTMLDivElement}    visorElement       Elemento del visor                                                   los operadores matemáticos
+ * @param {HTMLDivElement}    visorElement       Elemento del visor
  *
  * @returns {Boolean}         Verdadero por valor existente                       
  */
