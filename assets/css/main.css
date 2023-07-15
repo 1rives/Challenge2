@@ -1,0 +1,202 @@
+/** 
+ *  Primer Parcial - Practicas Profesionalizantes III 
+ *  Gonzalo Rives
+ */
+
+  /* Variables
+   * ========================================================================== */
+
+:root {
+    --full-white: #ffffff;
+    --white: #f0f0f0;
+    --light-grey: #d6d6d6;
+    --light-gray: #888;
+    --gray: #555;
+    --dark-blue: #424c52;
+
+    --bg-color: #d0d3db;
+    --main-text-color: var(--full-white);
+    --secondary-text-color: var(--light-grey);
+
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --semi-strong-shadow-color: rgba(0, 0, 0, 0.3);
+    --strong-shadow-color: rgba(0, 0, 0, 0.5);
+
+    --button-hover-color: #e6e6e6;
+    --button-operator-color: #c9d4da;
+    --button-operator-active-color: #bac5ca;
+    --button-enter-color: #ffb84e;
+    --button-enter-active-color: #e2a344;
+    --button-gap-color: #9facb6;
+    
+    --scrollbar-color: var(--white);
+    --scrollbar-hover-color: var(--light-gray);
+    --scrollbar-track-color: var(--gray);
+
+    --icon-color: var(--gray);
+
+    --calculator-visor-color: var(--dark-blue);
+}
+  /* Elementos generales
+   * ========================================================================== */
+
+* {
+    /* Barra de scroll en general */
+
+    /* Tamaño */
+    ::-webkit-scrollbar {
+        width: 2px;
+        height: 1rem;
+    }
+  
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track-color);
+    }
+    
+    /* Barra */
+    ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-color);
+    }
+  
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-hover-color);
+    }
+}
+
+body {
+    display: grid;
+
+    background: var(--bg-color);
+    font-family: sans-serif;
+
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    padding: 20px;
+    align-content: center;
+}
+
+.icon {
+    position: fixed;
+    width: 32px;
+    height: 32px; 
+    left: 1.25%; /* Posición del ícono */
+    bottom: 2%; /* Posición del ícono */
+
+    opacity: 75%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #424c52;
+
+    -webkit-mask-image: url('/assets/icons/github.svg'); /* Color del ícono */
+    mask-image: url('/assets/icons/github.svg'); /* Color del ícono */
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}
+
+  /* Elementos de la calculadora
+   * ========================================================================== */
+
+.calculator {
+    overflow: hidden; /* Los elementos no saldrán de la calculadora */
+    max-inline-size: 22rem; /* Fijar anchura de calculadora */
+
+    /* margin-top: 50%; */
+
+    /* border-radius: 3px;  Suaviza los bordes */
+    box-shadow: 0px 3px 6px 0px var(--shadow-color); /* Sombreado */
+
+    /* Centra la calculadora */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.calculator__visor {
+    font-size: 2.2rem;
+    text-align: end; /* Los números siempre estarán hacia la derecha */
+    
+    overflow: auto; /* Habilita el scroll cuando el número sea muy grande */
+
+    background-color: var(--calculator-visor-color);
+    color: var(--main-text-color);
+    
+    padding-top: 0rem; 
+    padding-bottom: 0.8rem; 
+    padding-right: 1rem; 
+    padding-left: 1rem; 
+}
+
+.calculator__visor--calc {
+    font-size: 1.1rem;
+
+    color: var(--secondary-text-color);
+
+    padding-top: 1.4rem;
+    padding-bottom: unset;
+}
+
+/* Contenedor de botones */
+.calculator__keys {
+    display: grid;
+
+    background-color: var(--button-gap-color);
+
+    padding: 0.2rem;
+    gap: 0.2rem; /* Distancia entre los botones */
+    grid-template-columns: repeat(4, 1fr); /* Mismo tamaño para todos los botones */
+}
+
+/* Botones - General */
+.calculator__key {
+    font-size: 2rem;
+    background: hsl(210, 25%, 95%);
+    border: none;
+    border-radius: 1px;
+
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem; 
+    padding-left: 1.6rem; 
+    padding-right: 1.6rem; 
+
+    transition: box-shadow 0.15s, background-color 0.07s; /* Transición para :hover */
+}
+
+.calculator__key:hover {
+    box-shadow: 0 0 4px var(--semi-strong-shadow-color) inset;
+}
+
+.calculator__key:active {
+    background-color: var(--button-hover-color);
+    box-shadow: 0 0 4px 1px var(--semi-strong-shadow-color) inset;
+}
+
+/* Botónes - Operadores */
+.calculator__key--operator {
+    background-color: var(--button-operator-color);
+}
+
+.calculator__key--operator:active {
+    background: var(--button-operator-active-color);
+}
+
+/* Botones - Enter */
+.calculator__key--enter {
+    height: auto;
+
+    background-color: var(--button-enter-color);
+
+    /* Estilos para mostrar correctamente el botón Enter */
+    grid-column: 4 / 5; /* Se posiciona en la esquina derecha */
+    grid-row-start: 2; /* Empieza desde la segunda fila */
+    grid-row-end: span 4; /* Se expande 4 filas hacia abajo */
+}
+
+.calculator__key--enter:active {
+    background: var(--button-enter-active-color);
+}

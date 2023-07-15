@@ -15,3 +15,5 @@ presente desarrollo podrán utilizar las tecnologías que consideren adecuadas.
 deberán seguir la nomenclatura BEM para el css y la correcta identación en el lenguaje
 de programación utilizado para darle funcionalidad a la calculadora, así como los
 comentarios en el código.
+
+Para realizar los cálculos matemáticos se utiliza la [libreria Math.js](https://mathjs.org/download.html).
