@@ -78,8 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 appendToVisor(buttonValue, resultVisor);
             }
 
-             // Si el boton apretado y el valor del visor son 0
-            // TODO: Agregar validación de respuestas repetidas
+            // Si el boton apretado y el valor del visor son 0
             if(parseInt(resultVisor.textContent) === 0) {
                 // No hace nada
                 resetVisorFlag = true;
