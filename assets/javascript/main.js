@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * 
      * @type {String}
      */
-    const expErrorMessage = 'ERROR';
+    const expErrorMessage = 'Syntax Error';
 
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -94,12 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
             //// Casos generales
 
             if (buttonValue === 'C') {
-                // Reset de valores
+                // Reset de todos los valores
                 clearAllVisor(resultVisor, calcResultVisor);
                 setVisorValue('0', resultVisor);
 
                 previousAns = '';
-                resetVisorFlag = true;
 
             } else if (buttonValue === '=') {
                 // Calcular el resultado
@@ -109,15 +108,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(typeof result === 'undefined') {
                     // Muestra resultado anterior si está vacio
                     setVisorValue(previousAns, resultVisor);
+                } else if(result instanceof Error) {
+                    // Muestra mensaje de error
+                    setVisorValue(expErrorMessage, resultVisor);
+                    alert(result.message);
+
+                    resetVisorFlag = true;
                 } else {
+                    // Muestra resultado exitoso
                     setVisorValue(result, resultVisor);
                     setCalcVisorValue(expression, calcResultVisor);
 
                     // Para uso posterior
                     previousAns = result;
+                    resetVisorFlag = true;
                 }
-                
-                
             }
         });
     });

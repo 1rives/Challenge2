@@ -19,7 +19,7 @@ const buttonOperatorClass = 'calculator__key--operator';
  * 
  * Usar la función eval() no está recomendada, por lo que se 
  * recurrirá a la libreria Math.js para realizar los calculos. 
- * Devuelve el mensaje de error al encontrarse uno.
+ * Devuelve excepción al encontrarse uno.
  * 
  * @param {String}            expression   Expresión a resolver
  *
@@ -30,7 +30,7 @@ function calculate(expression) {
         var result = math.evaluate(expression);
         return result;
     } catch(ex) {
-        return ex.message;
+        return ex;
     }
 }
 
